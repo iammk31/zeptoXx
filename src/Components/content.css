@@ -1,0 +1,50 @@
+body{
+    background-color: black;
+}
+#content{
+    background: url(/public/images/factors.gif);
+    background-size:cover;
+    background-position: center;
+    /* height: 100vh; */
+    /* width: 100%; */
+    overflow: hidden;
+    padding-bottom: 7rem;
+
+}
+/* #content:hover{
+    background: url(/public/images/img0.jpg);
+    background-size:cover;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+} */
+
+
+.notes{
+    color: black;
+    margin-top: 10%;
+}
+.content_btn{
+    color: azure;
+}
+/* #content::before{
+    content:'';
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    width: 100%;
+    /* background: rgb(8, 8, 8); */
+ */
+.content_container{
+    position: relative;
+    top: 13rem;
+    color: white;
+    width: 45%;
+    
+}
+.fade-in-out {
+    transition: opacity 0.2s ease-in-out;
+    opacity: 0; /* Initially set to transparent */
+  }
+  
