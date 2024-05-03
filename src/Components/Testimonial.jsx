@@ -16,8 +16,8 @@ const Testimonial = () => {
       <div className="testimonial-section-bottom">
         <img src={ProfilePic} alt="" />
         <p>
-          Lorem ipsum dolor sit amet consectetur. Non tincidunt magna non et
-          elit. Dolor turpis molestie dui magnis facilisis at fringilla quam.
+          "Together, as three B.Tech students, we strive to enrich the journey of youth,
+          making it brighter, bolder, and better than ever before."
         </p>
         <div className="testimonials-stars-container">
           <AiFillStar />

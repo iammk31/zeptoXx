@@ -10,17 +10,17 @@ const Work = () => {
     {
       image: Classroom,
       title: "Get Job",
-      text: "Lorem ipsum dolor sit amet consectetur. Maecenas orci et sagittis duis elementum interdum facilisi bibendum.",
+      text: "Teachers seek the joy of imparting knowledge, while students search for the guides who illuminate their path of learning.",
     },
     {
       image: Choose,
       title: "Buy Books",
-      text: "Lorem ipsum dolor sit amet consectetur. Maecenas orci et ",
+      text: "Explore our collection of textbooks for grades 6 to 12, essential companions for students on their educational journey!",
     },
     {
       image: DeliveryMeals,
       title: "Fast Deliveries",
-      text: "Lorem ipsum dolor sit amet consectetur. Maecenas orci et lorem ipsum",
+      text: "Rest assured, our commitment ensures timely deliveries of your books, so you never miss a beat in your academic pursuits!",
     },
   ];
   return (
@@ -29,8 +29,8 @@ const Work = () => {
         <p className="primary-subheading">Work</p>
         <h1 className="primary-heading">How It Works</h1>
         <p className="primary-text">
-          Lorem ipsum dolor sit amet consectetur. Non tincidunt magna non et
-          elit. Dolor turpis molestie dui magnis facilisis at fringilla quam.
+          "From textbooks spanning classes 6 to 12, rest assured of timely deliveries,
+          ensuring that teachers find their calling in teaching, and students find their guides for learning."
         </p>
       </div>
       <div className="work-section-bottom">
