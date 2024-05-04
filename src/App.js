@@ -5,7 +5,6 @@ import SignUp from "./Components/Auth/SignUp";
 import Login from "./Components/Auth/Login";
 import AboutUs from "./Components/AboutUs";
 import { FirebaseAuthProvider } from "./store/auth-context";
-import { PathContextProvider } from "./store/path-context";
 import Content from "./Components/Content";
 import Footer from "./Components/Footer";
 import Tnc from "./Components/Tnc";
@@ -24,7 +23,7 @@ function App() {
   
   return (
     <FirebaseAuthProvider>
-      <PathContextProvider>
+      
         <Router>
           <Navbar />
           <Routes>
@@ -44,7 +43,6 @@ function App() {
           </Routes>
           <Footer/> 
         </Router>
-      </PathContextProvider>
     </FirebaseAuthProvider>
     )
   }

@@ -4,28 +4,25 @@ import { db } from "../firebase";
 import { collection, setDoc, doc } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import Input from "./UI/Input";
-import PathContext from "../store/path-context";
+
 
 function UserType(props) {
   const [formData, setFormData] = useState({});
   // const [path, setPath] = useState(null);
-  const pathCtx = useContext(PathContext);
+  
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
     try {
-      const path =
-        formData.userType === "teacher"
-          ? "users/teacher/data"
-          : "users/student/data";
       const userEmail = props.email;
       const docRef = await setDoc(
-        doc(collection(db, path), userEmail),
+        doc(collection(db, "users"), userEmail),
         formData
       );
       console.log("Document written with ID: ", userEmail);
-
-      pathCtx.onPathChange({path, userEmail});
+      localStorage.setItem("userEmail", userEmail);
+      // pathCtx.onPathChange({userEmail});
       navigate("/login");
     } catch (error) {
       // handle the error
@@ -34,7 +31,7 @@ function UserType(props) {
   };
 
   return (
-    <div className="container container-fluid d-flex flex-column justify-content-center ">
+    <div className="container container-fluid d-flex flex-column justify-content-center h-100">
     <div className="column">
       <h1 className="text-light">You are a?</h1>
       <button

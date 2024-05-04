@@ -1,16 +1,15 @@
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { useState,useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import Dashboard from "../Dashboard/Dashboard";
 import { useFirebaseAuth } from "../../store/auth-context";
-import {  getDoc, doc, getDocs, collection } from "firebase/firestore";
+import { getDoc, doc, getDocs, collection } from "firebase/firestore";
 import { db } from "../../firebase";
-import style from './Login.module.css'
-import PathContext from "../../store/path-context";
+import style from "./Login.module.css";
 
 function Login() {
   // const [authUser, setAuthUser] = useState(null);
   const [email, setEmail] = useState("");
-  const [data, setData] = useState({});
+  const [userData, setUserData] = useState({});
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
@@ -19,10 +18,9 @@ function Login() {
 
   const authUser = useFirebaseAuth();
   const auth = getAuth();
-  const pathCtx = useContext(PathContext);
+
   const logIn = (e) => {
     setLoading(true);
-    pathCtx.onPathChange({path: path, userEmail: email});
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
@@ -35,95 +33,88 @@ function Login() {
       });
   };
 
-  useEffect( () => {
+  useEffect(() => {
+    setEmail(localStorage.getItem("userEmail"));
     getData();
   }, []);
 
   const getData = () => {
-    
-    const docId = pathCtx.email;
-    const colPath = pathCtx.path;
-
-    if (docId && colPath) {
-    const promises = getDoc(doc(collection(db, colPath), docId));
-
-    Promise.all(promises)
-      .then((snapshots) => {
-        const data = snapshots.reduce((acc, snapshot) => {
-          if (snapshot.exists()) {
-            return { ...acc, ...snapshot.data() };
-          }
-          return acc;
-        }, {});
-        console.log(data);
-        console.log(data.userType);
-        setPath(`users/${data.userType}/data`);
-        console.log(path);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    if (email) {
+      getDoc(doc(collection(db, "users"), email))
+        .then((currentDoc) => {
+          console.log(currentDoc.data());
+          setUserData(currentDoc.data());
+        })
+        .catch((error) => console.error(error));
     }
   };
 
   const userSignOut = () => {
     signOut(auth)
       .then(() => {
+        localStorage.clear();
         console.log("Signed out successfully");
+
       })
       .catch((error) => console.error(error));
   };
   return (
-    <div className={style.Login}> 
-    <div className="container col-md-6">
-      {authUser ? (
-        <>
-          {loading ? (
-            <p>Loading...</p>
-          ) : (
-            <>
-              <p>
-                {`Logged In as ${authUser.email}`}
-                <button
-                  className="btn btn-sm btn-outline-warning"
-                  onClick={userSignOut}
-                >
-                  LogOut
-                </button>
-              </p>
-              <Dashboard collectionPath={pathCtx.path} currentUserEmail={pathCtx.email} />
-            </>
-          )}
-        </>
-      ) : (
-        <form onSubmit={logIn} className={style.Login.form}>
-          
-          <input
-            className={style.Login.input &&"form-control"}
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            className={style.Login.input &&"form-control"}
-            type="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <select onChange={(e) => setPath(`users/${e.target.value}/data`)}>
-          <option value="">You are a?</option>
-          <option value={"teacher"}>Teacher</option>
-          <option value={"student"}>Student</option>
-          </select>
-          <button className="btn btn-lg btn-outline-secondary" type="submit">
-            LogIn
-          </button>
-          {error && <p style={{ color: "red" }}>{error}</p>}
-        </form>
-      )}
-    </div>
+    <div
+      className={
+        "container d-flex flex-column justify-content-center align-items-center vh-100"
+      }
+      style={{
+        backgroundImage: "url('../../images/img7.jpg')",
+        backgroundSize: "cover",
+      }}
+    >
+      <div className="container overflow-scroll">
+        {authUser ? (
+          <>
+            {loading ? (
+              <p>Loading...</p>
+            ) : (
+              <div className="text-center">
+                <p className="w-50 text-center text-bg-info ">
+                  {`Logged In as ${authUser.email}`}
+                  <button
+                    className="btn btn-sm btn-outline-warning"
+                    onClick={userSignOut}
+                  >
+                    LogOut
+                  </button>
+                </p>
+                <Dashboard userData={userData} />
+              </div>
+            )}
+          </>
+        ) : (
+          <form
+            onSubmit={logIn}
+            className={"container d-flex flex-column w-50"}
+          >
+            <input
+              className={"form-control"}
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              className={"form-control"}
+              type="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+            <button className="btn btn-lg btn-outline-secondary" type="submit">
+              LogIn
+            </button>
+            {error && <p style={{ color: "red" }}>{error}</p>}
+          </form>
+        )}
+      </div>
     </div>
   );
 }

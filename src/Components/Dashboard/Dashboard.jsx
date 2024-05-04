@@ -1,14 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { db } from "../../firebase";
-import { collection, getDocs } from "firebase/firestore";
-import Users from './Users'
+import { collection, getDocs, query, where } from "firebase/firestore";
+import Users from "./Users";
 
 function Dashboard(props) {
-  console.log(props)
-  const currentPath = props.collectionPath;
-  console.log(currentPath);
-  console.log('9')
+  console.log(props);
   const [pinCode, setPinCode] = useState("");
   const [filteredStudents, setFilteredStudents] = useState([]);
 
@@ -17,43 +14,32 @@ function Dashboard(props) {
   };
 
   const handleSubmit = () => {
+    console.log(props.userData)
     // fetchData();
-    if(pinCode===''){
-      console.log(pinCode)
-      return
+    if (pinCode === "") {
+      console.log(pinCode);
+      return;
     }
-    console.log("handle submit called");
-    console.log(currentPath);
-    const path = currentPath.includes("teacher")
-      ? "users/student/data"
-      : "users/teacher/data";
-    console.log("path is set");
-    getDocs(collection(db, path)).then((data) => {
-      console.log(path);
-      console.log("get docs called");
-      // data.docs;
-      // setStudents(data.docs.map((doc) => doc.data()));
-      console.log("students set");
-      
-      setFilteredStudents(
-        data.docs
-          .map((doc) => doc.data())
-          .filter((student) => student.pincode.includes(pinCode))
-      );
-      console.log("filtered studetn set");
+
+    const uType = props.userData.userType === "student" ? "teacher" : "student";
+    console.log(uType);
+    const q = query(
+      collection(db, "users"),
+      where("userType", "==", uType),
+      where("pincode", "==", pinCode)
+    );
+    getDocs(q).then((data) => {
+      setFilteredStudents(data.docs.map((doc) => doc.data()));
+      console.log("filtered student set");
     });
-    // setFilteredStudents(
-    //   students.filter((student) => student.pincode.includes(pinCode))
-    // );
   };
-  console.log("component re-rendered");
   console.log(filteredStudents);
 
   return (
     // <div>
     //   {currentPath === "users/teacher/data" ? <Teachers /> : <Students />}
     // </div>
-    <div>
+    <div className="container container-fluid">
       <input
         type="text"
         placeholder="Enter Pin Code"
@@ -82,9 +68,7 @@ function Dashboard(props) {
       ))} */}
       {filteredStudents.map((student) => (
         <Users
-          currentUser={student}
-          currentPath={currentPath}
-          currentUserEmail={props.currentUserEmail}
+          data={student}
         />
       ))}
     </div>

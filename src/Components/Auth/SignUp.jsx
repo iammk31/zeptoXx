@@ -81,7 +81,7 @@ function SignUp() {
             <UserType email={emailState.value} />
           </div>
         ) : (
-          <form onSubmit={signUp} className="col g-3">
+          <form onSubmit={signUp} className="col g-3 h-100">
             <div className="col-4">
               <input
                 className="form-control"
