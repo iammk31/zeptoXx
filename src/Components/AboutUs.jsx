@@ -16,8 +16,8 @@ const AboutUs = () => {
                         <img src="../../images/students.jpg" alt="" />
                     </div>
                     <div className="about-content">
-                        <p>zeptoX-EDUCATION is a powerful and versatile online and offline course application 
-                            carefully designed to connect students with professionals who are not dedicated to 
+                        <p>zeptoX-EDUCATION is a powerful and versatile online platform
+                            carefully designed to connect students with professionals who are not only dedicated to 
                             teaching and are skilled in their work. zeptoX is at the forefront of a 
                             transformative education revolution, providing a versatile platform that promises 
                             to redefine how we access and participate in high-quality education.

@@ -22,7 +22,7 @@ function Pricing() {
               <h5 className="card-title">All Subjects</h5>
               <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
               <Link to="/Subject">
-                <button className="btn btn-primary">Click</button>
+                <button className="btn btn-primary">Buy Now</button>
               </Link>
             </div>
           </div>

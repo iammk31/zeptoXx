@@ -35,7 +35,7 @@ function UserType(props) {
     <div className="column">
       <h1 className="text-light">You are a?</h1>
       <button
-        className="btn btn-md btn-outline-info"
+        className={`btn btn-md btn-outline-info text-light ${formData.userType === "teacher" ? "btn-info text-dark btn-outline-none" : ""}`}
         onClick={() => {
           // setPath("users/teacher/data");
           setFormData({ ...formData, userType: "teacher" });
@@ -44,7 +44,7 @@ function UserType(props) {
         Teacher
       </button>
       <button
-        className="btn btn-md btn-outline-secondary"
+        className={`btn btn-md btn-outline-secondary text-light ${formData.userType === "student" ? "btn-secondary text-dark btn-outline-none" : ""}`}
         onClick={() => {
           // setPath("users/student/data");
           setFormData({ ...formData, userType: "student" });

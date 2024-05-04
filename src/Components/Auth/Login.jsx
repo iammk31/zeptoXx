@@ -61,21 +61,21 @@ function Login() {
   return (
     <div
       className={
-        "container d-flex flex-column justify-content-center align-items-center vh-100"
+        " d-flex flex-column justify-content-center align-items-center vh-100 vw-100"
       }
       style={{
         backgroundImage: "url('../../images/img7.jpg')",
         backgroundSize: "cover",
       }}
     >
-      <div className="container overflow-scroll">
+      <div className="container  overflow-scroll">
         {authUser ? (
           <>
             {loading ? (
               <p>Loading...</p>
             ) : (
               <div className="text-center">
-                <p className="w-50 text-center text-bg-info ">
+                <p >
                   {`Logged In as ${authUser.email}`}
                   <button
                     className="btn btn-sm btn-outline-warning"

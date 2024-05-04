@@ -22,7 +22,8 @@ const Users = (props) => {
   };
 
   return (
-    <div className="card">
+    <div className="card" style={{'background': 'rgb(4,34,250)',
+      'background': 'linear-gradient(90deg, rgba(4,34,250,0.854954481792717) 0%, rgba(201,231,230,1) 0%, rgba(239,243,194,1) 100%)'}}>
       <div className="card-header">
         <h2>{props.data.userType.toUpperCase()}</h2>
       </div>

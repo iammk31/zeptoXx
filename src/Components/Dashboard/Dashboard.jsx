@@ -15,7 +15,6 @@ function Dashboard(props) {
 
   const handleSubmit = () => {
     console.log(props.userData)
-    // fetchData();
     if (pinCode === "") {
       console.log(pinCode);
       return;
@@ -36,9 +35,6 @@ function Dashboard(props) {
   console.log(filteredStudents);
 
   return (
-    // <div>
-    //   {currentPath === "users/teacher/data" ? <Teachers /> : <Students />}
-    // </div>
     <div className="container container-fluid">
       <input
         type="text"
@@ -49,23 +45,6 @@ function Dashboard(props) {
       <button className="btn btn-md btn-primary" onClick={handleSubmit}>
         Submit
       </button>
-
-      {/* {filteredStudents.map((student) => (
-        <div className="card" key={student.id}>
-          <div className="card-header">
-            <h2>{currentPath.includes("teacher") ? "Student" : "Teacher"}</h2>
-          </div>
-          <div className="card-body">
-            <h5 className="card-title">{student.name}</h5>
-            <p className="card-text">{student.address}</p>
-            <button className="btn btn-primary">
-            <Link to="#" className="btn btn-primary">
-              Show Interest
-            </Link>
-            </button>
-          </div>
-        </div>
-      ))} */}
       {filteredStudents.map((student) => (
         <Users
           data={student}
