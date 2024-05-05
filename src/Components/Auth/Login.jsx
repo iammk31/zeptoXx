@@ -2,19 +2,19 @@ import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useState, useEffect, useContext } from "react";
 import Dashboard from "../Dashboard/Dashboard";
 import { useFirebaseAuth } from "../../store/auth-context";
-import { getDoc, doc, getDocs, collection } from "firebase/firestore";
+import { getDoc, doc, getDocs, collection, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import style from "./Login.module.css";
+import { useSearchParams } from "react-router-dom";
 
 function Login() {
   // const [authUser, setAuthUser] = useState(null);
   const [email, setEmail] = useState("");
-  const [userData, setUserData] = useState({});
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
-  const [userType, setUserType] = useState();
-  const [path, setPath] = useState();
+  const searchQuery = useSearchParams()[0];
+  const paymentRef = searchQuery.get("referenceid");
 
   const authUser = useFirebaseAuth();
   const auth = getAuth();
@@ -26,7 +26,6 @@ function Login() {
       .then(() => {
         setLoading(false);
         getData();
-        console.log(path);
       })
       .catch((error) => {
         console.error(error);
@@ -36,6 +35,7 @@ function Login() {
   useEffect(() => {
     setEmail(localStorage.getItem("userEmail"));
     getData();
+    addPayment();
   }, []);
 
   const getData = () => {
@@ -43,9 +43,23 @@ function Login() {
       getDoc(doc(collection(db, "users"), email))
         .then((currentDoc) => {
           console.log(currentDoc.data());
-          setUserData(currentDoc.data());
+          localStorage.setItem("userData", JSON.stringify(currentDoc.data()));
         })
         .catch((error) => console.error(error));
+    }
+  };
+
+  const addPayment = async () => {
+    if (paymentRef) {
+      console.log("adding payment");
+      console.log(paymentRef);
+      const customerId = localStorage.getItem("userEmail");
+      const productId = localStorage.getItem("productId");
+      const docRef = await setDoc(doc(collection(db, "payments"), paymentRef), {
+        customerId,
+        productId,
+        status: "success"
+      });
     }
   };
 
@@ -54,7 +68,6 @@ function Login() {
       .then(() => {
         localStorage.clear();
         console.log("Signed out successfully");
-
       })
       .catch((error) => console.error(error));
   };
@@ -75,7 +88,7 @@ function Login() {
               <p>Loading...</p>
             ) : (
               <div className="text-center">
-                <p >
+                <p>
                   {`Logged In as ${authUser.email}`}
                   <button
                     className="btn btn-sm btn-outline-warning"
@@ -84,7 +97,7 @@ function Login() {
                     LogOut
                   </button>
                 </p>
-                <Dashboard userData={userData} />
+                <Dashboard />
               </div>
             )}
           </>
@@ -98,7 +111,10 @@ function Login() {
               type="email"
               placeholder="Enter your email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                localStorage.setItem("userEmail", e.target.value);
+              }}
             />
             <input
               className={"form-control"}
