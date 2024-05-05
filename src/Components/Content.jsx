@@ -20,12 +20,13 @@ function Content() {
 
     return (
       <>
-      <section className="content container-fluid mb-2">
-        <div className={`container container-fluid bg-image ${isChatOpen}`} style={{ backgroundImage: "url('../../images/factors.gif')", backgroundSize: "cover", backgroundPosition: "center", 'minHeight': "100vh", 'minWidth': '100%', 'marginBottom': "-20px" }}>
+      <section className="mb-2" style={{overflowY: "hidden"}}>
+        <div  className={` ${isChatOpen}`} style={{ backgroundImage: "url('../../images/factors.gif')", backgroundSize: "cover", backgroundPosition: "center", height: "110vh", width: "100vw", paddingTop: "15px"}}>
             <div className="d-flex flex-col justify-content-between">
               <button
                 onClick={toggleChat}
-                className="btn btn-sm btn-outline-secondary"
+                className="btn btn-sm btn-success"
+                style={{marginLeft: "10px"}}
               >
                 {isChatOpen ? 'Minimize Chat' : 'Contact Us'}
               </button>
@@ -49,7 +50,10 @@ function Content() {
             </div>
         </div>
       </section>
+      <div style={{}}>
       <Pricing/>
+      </div>
+
       <Work />
       <Testimonial />
       </>

@@ -8,11 +8,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgb(234,234,234);
+    background: rgb(255,255,255);
 
 }
 .pranit{
-    background: rgb(234,234,234);
+    background: rgb(255,254,254);
 }
 .navbar_right{
     display: flex;
