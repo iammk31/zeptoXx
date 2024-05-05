@@ -15,13 +15,13 @@ function Dashboard() {
   };
 
   const handleSubmit = () => {
-    const pin = localStorage.getItem("pincode");
-    if (pin === "") {
-      console.log(pin);
-      return;
-    }
-
+    
     if (userData) {
+      const pin = localStorage.getItem("pincode");
+      if (pin === "") {
+        console.log(pin);
+        return;
+      }
       console.log(userData);
       const uType = userData.userType === "student" ? "teacher" : "student";
       console.log(uType);

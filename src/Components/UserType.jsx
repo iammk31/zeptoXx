@@ -22,7 +22,7 @@ function UserType(props) {
       );
       console.log("Document written with ID: ", userEmail);
       localStorage.setItem("userEmail", userEmail);
-      // pathCtx.onPathChange({userEmail});
+      localStorage.setItem("userData",JSON.stringify({...formData}));
       navigate("/login");
     } catch (error) {
       // handle the error
