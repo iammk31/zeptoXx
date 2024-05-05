@@ -74,16 +74,18 @@ function SignUp() {
   };
 
   return (
-    <div className="row bg-dark" style={{ height: "105vh" , display: "flex", justifyContent: "center", alignItems: "center", backgroundImage: "url('https://images.unsplash.com/photo-1588702547919-26089e690ecc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')", backgroundSize: "cover", backgroundPosition: "center"}}>
+    <div className="row bg-dark" style={{ height: "105vh" , display: "flex", justifyContent: "center", alignItems: "center", backgroundImage: "url('/images/img5.jpg')", backgroundSize: "cover", backgroundPosition: "center"}}>
       <div className="container d-flex justify-content-center">
         {isSignedUp ? (
           <div className="container bg-light" style={{backgroundImage:"url('https://images.unsplash.com/photo-1547127796-06bb04e4b315?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')", backgroundSize: "cover", backgroundPosition: "center",  'minHeight': "100vh",'minWidth':'100%', }}>
             <UserType email={emailState.value} />
           </div>
         ) : (
-          <form onSubmit={signUp} className="col g-3 h-100">
-            <div className="col-4">
+          <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+          <form onSubmit={signUp} >
+            <div >
               <input
+              style={{width: "25vw"}}
                 className="form-control"
                 type="email"
                 placeholder="Enter your email"
@@ -92,8 +94,9 @@ function SignUp() {
                 onBlur={validateEmailHandler}
               />
             </div>
-            <div className="col-4">
+            <div >
               <input
+              style={{marginTop: "15px",width: "25vw"}}
                 className="form-control"
                 type="password"
                 placeholder="Enter your password"
@@ -102,12 +105,13 @@ function SignUp() {
                 onBlur={validatePasswordHandler}
               />
             </div>
-            <div className="col-6">
+            <div style={{textAlign: "center", marginTop: "15px"}}>
               <button className="btn btn-outline-danger btn-sm" type="submit">
                 SignUp
               </button>
             </div>
           </form>
+          </div>
         )}
       </div>
     </div>

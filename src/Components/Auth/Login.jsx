@@ -81,7 +81,7 @@ function Login() {
         backgroundSize: "cover",
       }}
     >
-      <div className="container  overflow-scroll">
+      <div className="container ">
         {authUser ? (
           <>
             {loading ? (
@@ -102,15 +102,17 @@ function Login() {
             )}
           </>
         ) : (
+          <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
           <form
             onSubmit={logIn}
-            className={"container d-flex flex-column w-50"}
+            className=""
           >
             <input
               className={"form-control"}
               type="email"
               placeholder="Enter your email"
               value={email}
+              style={{width: "25vw"}}
               onChange={(e) => {
                 setEmail(e.target.value);
                 localStorage.setItem("userEmail", e.target.value);
@@ -120,15 +122,20 @@ function Login() {
               className={"form-control"}
               type="password"
               placeholder="Enter your password"
+              style={{width: "25vw",marginTop: "15px"}}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <button className="btn btn-lg btn-outline-secondary" type="submit">
-              LogIn
+              <div style={{textAlign: "center"}}>
+              <button className="btn btn-outline-danger btn-sm" type="submit" style={{width: "7vw",marginTop: "15px"}}>
+              Login
             </button>
+              </div>
+            
             {error && <p style={{ color: "red" }}>{error}</p>}
           </form>
+          </div>
         )}
       </div>
     </div>
