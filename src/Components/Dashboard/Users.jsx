@@ -5,7 +5,7 @@ import { collection, getDoc, getDocs, query, where } from "firebase/firestore";
 
 const teacherAmount = 50;
 const studentAmount = 30;
-const BACKEND_URL = "http://localhost:4000";
+const BACKEND_URL = "https://zepto-x-back-end.vercel.app/";
 
 const Users = (props) => {
   // const navigate = useNavigate();
